@@ -17,31 +17,43 @@ button:focus-visible { outline: 3px solid #b2eee0; outline-offset: 5px; }
   padding: max(48px, env(safe-area-inset-top)) max(24px, env(safe-area-inset-right)) max(40px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left));
   background: radial-gradient(ellipse at 85% 0%, #1d3833 0%, transparent 60%), #101918;
 }
-.selection-content { max-width: 1120px; margin: 0 auto; }
+.selection-content { max-width: 1120px; margin: 0 auto; container-type: inline-size; }
 .eyebrow { margin: 0 0 10px; font-size: 13px; color: #a3bdb4; letter-spacing: .16em; }
 .selection-content h1 { margin: 0 0 32px; font-size: clamp(28px, 4vw, 40px); font-weight: 650; letter-spacing: -.04em; }
-.spirit-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 24px; }
+.spirit-list {
+  /* 이전 한 열 배너(최대 700px)의 가로·세로를 각각 1/3로 축소합니다. */
+  --spirit-card-width: min(calc(100% / 3), calc(700px / 3));
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(0, var(--spirit-card-width)));
+  gap: 8px;
+}
+@container (min-width: 864px) {
+  /* 이전 두 열의 각 너비 (전체 - 간격 24px) / 2 를 다시 3으로 나눕니다. */
+  .spirit-list { --spirit-card-width: calc((100% - 24px) / 6); }
+}
 .spirit-card {
   position: relative;
   display: flex;
   align-items: center;
   width: 100%;
-  max-width: 700px;
+  max-width: calc(700px / 3);
+  min-width: 0;
+  min-height: 0;
   aspect-ratio: 10 / 3;
   overflow: hidden;
   border: 1px solid #ffffff25;
-  border-radius: 16px;
+  border-radius: 6px;
   padding: 0;
   background: #183e3c;
   color: #fff;
   cursor: pointer;
   text-align: left;
-  box-shadow: 0 12px 32px #0004;
+  box-shadow: 0 4px 10px #0004;
   isolation: isolate;
 }
 .spirit-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; user-select: none; -webkit-user-drag: none; }
 .spirit-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, #0009, #0004 65%, #0005); }
-.spirit-card__name { position: relative; z-index: 1; display: block; padding: 24px 32px; font-size: clamp(20px, 3vw, 30px); font-weight: 700; line-height: 1.35; letter-spacing: -.04em; text-shadow: 0 2px 8px #000b; }
+.spirit-card__name { position: relative; z-index: 1; display: block; padding: 4px 8px; font-size: clamp(10px, 1.2vw, 13px); font-weight: 700; line-height: 1.2; letter-spacing: -.04em; text-shadow: 0 1px 4px #000b; overflow-wrap: anywhere; }
 @media (hover: hover) { .spirit-card:hover { border-color: #b2eee0a0; } .icon-button:hover { background: #ffffff12; } }
 .board-screen { height: 100vh; height: 100svh; background: #101918; display: flex; flex-direction: column; }
 .board-toolbar {
@@ -75,4 +87,4 @@ button:focus-visible { outline: 3px solid #b2eee0; outline-offset: 5px; }
 @supports (height: 100svh) { .board-stage { --board-available-height: calc(100svh - var(--toolbar-height) - env(safe-area-inset-top) - env(safe-area-inset-bottom)); } }
 .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 noscript { display: block; padding: 24px; }
-@media (max-width: 480px) { .spirit-card__name { padding: 18px 20px; } .selection-screen { padding-top: 36px; } }
+@media (max-width: 480px) { .spirit-card__name { padding: 2px 4px; } .selection-screen { padding-top: 36px; } }
