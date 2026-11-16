@@ -3,21 +3,36 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#2b2117">
-  <meta name="description" content="정령섬 햇살 아래 넘치는 강물 정령보드와 현신 트랙 터치 도구">
-  <title>햇살 아래 넘치는 강물 — 정령보드</title>
-  <style>
-    * { box-sizing: border-box; }
-    html, body { margin: 0; min-height: 100%; background: #2b2117; }
-    body { min-height: 100vh; min-height: 100svh; display: grid; place-items: center; }
-    #board { width: 100%; }
-    noscript { display: block; color: #fff; padding: 1rem; }
-  </style>
+  <meta name="theme-color" content="#101918">
+  <meta name="description" content="정령을 선택하고 현신 트랙을 터치하는 정령섬 보조 보드">
+  <title>정령섬 · 정령 선택</title>
+  <link rel="stylesheet" href="./styles.css?v=2">
+  <script defer src="./spirits/river/river.js?v=2"></script>
+  <script defer src="./app.js?v=2"></script>
 </head>
 <body>
-  <main id="board" aria-label="정령보드"></main>
-  <noscript>현신을 터치하려면 브라우저의 JavaScript를 켜주세요.</noscript>
-  <script src="./spirits/river/river.js"></script>
-  <script>RiverSurgesInSunlight.mount(document.getElementById('board'));</script>
+  <main>
+    <section id="selection-screen" class="selection-screen" aria-labelledby="selection-title">
+      <div class="selection-content">
+        <p class="eyebrow">정령섬</p>
+        <h1 id="selection-title">정령 선택</h1>
+        <div id="spirit-list" class="spirit-list"></div>
+      </div>
+    </section>
+    <section id="board-screen" class="board-screen" aria-labelledby="board-title" hidden>
+      <header class="board-toolbar">
+        <button id="back-button" class="icon-button" type="button" aria-label="정령 선택으로 돌아가기" title="정령 선택">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><path d="m19 7-9 9 9 9M10 16h15"/></svg>
+        </button>
+        <h1 id="board-title"></h1>
+        <button id="reset-button" class="icon-button reset-button" type="button" aria-label="현신 초기화" title="현신 초기화" disabled>
+          <svg id="reset-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M26 12a11 11 0 1 0 .2 7M26 4v8h-8"/></svg>
+        </button>
+      </header>
+      <div id="board" class="board-stage"></div>
+      <p id="board-status" class="visually-hidden" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+  <noscript>정령 선택과 현신 터치를 사용하려면 브라우저의 JavaScript를 켜주세요.</noscript>
 </body>
 </html>
