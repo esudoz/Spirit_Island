@@ -14,12 +14,10 @@ button:focus-visible { outline: 3px solid #b2eee0; outline-offset: 5px; }
 .selection-screen {
   min-height: 100vh;
   min-height: 100svh;
-  padding: max(48px, env(safe-area-inset-top)) max(24px, env(safe-area-inset-right)) max(40px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left));
+  padding: max(24px, env(safe-area-inset-top)) max(24px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left));
   background: radial-gradient(ellipse at 85% 0%, #1d3833 0%, transparent 60%), #101918;
 }
 .selection-content { max-width: 1120px; margin: 0 auto; container-type: inline-size; }
-.eyebrow { margin: 0 0 10px; font-size: 13px; color: #a3bdb4; letter-spacing: .16em; }
-.selection-content h1 { margin: 0 0 32px; font-size: clamp(28px, 4vw, 40px); font-weight: 650; letter-spacing: -.04em; }
 .spirit-list {
   /* 이전 한 열 배너(최대 700px)의 가로·세로를 각각 1/3로 축소합니다. */
   --spirit-card-width: min(calc(100% / 3), calc(700px / 3));
@@ -65,8 +63,7 @@ button:focus-visible { outline: 3px solid #b2eee0; outline-offset: 5px; }
   gap: 12px;
   align-items: center;
 }
-.board-toolbar h1 { font-size: clamp(13px, 2vw, 16px); margin: 0; font-weight: 500; text-align: center; color: #c9d6d1; }
-.board-heading { min-width: 0; text-align: center; }
+.board-center { min-width: 0; text-align: center; }
 .wake-button { display: inline-flex; align-items: center; justify-content: center; gap: 5px; min-height: 26px; margin: 0; padding: 2px 6px; border: 0; border-radius: 6px; background: transparent; color: #a3bdb4; font-size: 11px; cursor: pointer; }
 .wake-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
 .wake-button[data-state="active"] { color: #a7e7bd; }
@@ -87,4 +84,4 @@ button:focus-visible { outline: 3px solid #b2eee0; outline-offset: 5px; }
 @supports (height: 100svh) { .board-stage { --board-available-height: calc(100svh - var(--toolbar-height) - env(safe-area-inset-top) - env(safe-area-inset-bottom)); } }
 .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 noscript { display: block; padding: 24px; }
-@media (max-width: 480px) { .spirit-card__name { padding: 2px 4px; } .selection-screen { padding-top: 36px; } }
+@media (max-width: 480px) { .spirit-card__name { padding: 2px 4px; } }

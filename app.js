@@ -7,7 +7,6 @@
   const boardScreen = document.getElementById('board-screen');
   const list = document.getElementById('spirit-list');
   const boardHost = document.getElementById('board');
-  const title = document.getElementById('board-title');
   const backButton = document.getElementById('back-button');
   const resetButton = document.getElementById('reset-button');
   const resetIcon = document.getElementById('reset-icon');
@@ -42,7 +41,7 @@
     if (currentBoard) currentBoard.destroy();
     currentBoard = spirit.mount(boardHost);
     selectedCard = card;
-    title.textContent = spirit.name;
+    boardScreen.setAttribute('aria-label', `${spirit.name} 정령보드`);
     document.title = `${spirit.name} · 정령섬`;
     status.textContent = '';
     selectionScreen.hidden = true;

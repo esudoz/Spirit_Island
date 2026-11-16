@@ -6,28 +6,25 @@
   <meta name="theme-color" content="#101918">
   <meta name="description" content="정령을 선택하고 현신 트랙을 터치하는 정령섬 보조 보드">
   <title>정령섬 · 정령 선택</title>
-  <link rel="stylesheet" href="./styles.css?v=5">
+  <link rel="stylesheet" href="./styles.css?v=6">
   <script defer src="./spirits/river/river.js?v=2"></script>
   <script defer src="./spirits/lightning/lightning.js?v=4"></script>
   <script defer src="./wake-lock.js?v=3"></script>
-  <script defer src="./app.js?v=4"></script>
+  <script defer src="./app.js?v=6"></script>
 </head>
 <body>
   <main>
-    <section id="selection-screen" class="selection-screen" aria-labelledby="selection-title">
+    <section id="selection-screen" class="selection-screen" aria-label="정령 선택">
       <div class="selection-content">
-        <p class="eyebrow">정령섬</p>
-        <h1 id="selection-title">정령 선택</h1>
         <div id="spirit-list" class="spirit-list"></div>
       </div>
     </section>
-    <section id="board-screen" class="board-screen" aria-labelledby="board-title" hidden>
+    <section id="board-screen" class="board-screen" aria-label="정령보드" hidden>
       <header class="board-toolbar">
         <button id="back-button" class="icon-button" type="button" aria-label="정령 선택으로 돌아가기" title="정령 선택">
           <svg viewBox="0 0 32 32" aria-hidden="true"><path d="m19 7-9 9 9 9M10 16h15"/></svg>
         </button>
-        <div class="board-heading">
-          <h1 id="board-title"></h1>
+        <div class="board-center">
           <button id="wake-button" class="wake-button" type="button" data-state="off" aria-pressed="false" title="화면 꺼짐 방지 켜기">
             <span class="wake-dot" aria-hidden="true"></span>
             <span id="wake-label" aria-live="polite">화면 켜짐 유지</span>
