@@ -2,7 +2,7 @@
 (function () {
   'use strict';
   // 새 정령 파일을 index.html에서 불러온 다음 이 목록에 등록합니다.
-  const spirits = [window.RiverSurgesInSunlight];
+  const spirits = [window.RiverSurgesInSunlight, window.LightningSwiftStrike];
   const selectionScreen = document.getElementById('selection-screen');
   const boardScreen = document.getElementById('board-screen');
   const list = document.getElementById('spirit-list');
@@ -12,6 +12,29 @@
   const resetButton = document.getElementById('reset-button');
   const resetIcon = document.getElementById('reset-icon');
   const status = document.getElementById('board-status');
+  const wakeButton = document.getElementById('wake-button');
+  const wakeLabel = document.getElementById('wake-label');
+  let wakeState = 'off';
+  const awake = window.ScreenAwake.create(state => {
+    wakeState = state;
+    const labels = {
+      off: '화면 켜짐 유지',
+      pending: '화면 유지 요청 중…',
+      active: '화면 켜짐 유지 중',
+      paused: '화면 유지 대기 중',
+      released: '화면 유지 해제됨 · 재시도',
+      blocked: '화면 유지 안 됨 · 재시도',
+      unsupported: '화면 유지 미지원',
+    };
+    wakeLabel.textContent = labels[state];
+    wakeButton.dataset.state = state;
+    wakeButton.setAttribute('aria-pressed', String(state === 'active'));
+    wakeButton.disabled = state === 'pending' || state === 'unsupported';
+    wakeButton.title = state === 'active' ? '화면 꺼짐 방지 끄기'
+      : state === 'unsupported' ? '지원되는 Safari에서 HTTPS 사이트 주소로 열어주세요.'
+      : state === 'blocked' || state === 'released' ? '저전력 모드 등으로 해제될 수 있습니다. 눌러서 다시 시도하세요.'
+      : '화면 꺼짐 방지 켜기';
+  });
   let currentBoard = null;
   let selectedCard = null;
 
@@ -25,6 +48,7 @@
     selectionScreen.hidden = true;
     boardScreen.hidden = false;
     resetButton.disabled = false;
+    awake.start();
     backButton.focus({ preventScroll: true });
   }
 
@@ -48,6 +72,7 @@
   }
 
   backButton.addEventListener('click', () => {
+    awake.stop();
     if (currentBoard) currentBoard.destroy();
     currentBoard = null;
     boardScreen.hidden = true;
@@ -56,6 +81,12 @@
     status.textContent = '';
     document.title = '정령섬 · 정령 선택';
     if (selectedCard) selectedCard.focus({ preventScroll: true });
+  });
+
+  wakeButton.addEventListener('click', () => {
+    if (!currentBoard) return;
+    if (wakeState === 'active') awake.stop();
+    else awake.start();
   });
 
   resetButton.addEventListener('click', () => {

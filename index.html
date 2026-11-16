@@ -6,9 +6,11 @@
   <meta name="theme-color" content="#101918">
   <meta name="description" content="정령을 선택하고 현신 트랙을 터치하는 정령섬 보조 보드">
   <title>정령섬 · 정령 선택</title>
-  <link rel="stylesheet" href="./styles.css?v=2">
+  <link rel="stylesheet" href="./styles.css?v=3">
   <script defer src="./spirits/river/river.js?v=2"></script>
-  <script defer src="./app.js?v=2"></script>
+  <script defer src="./spirits/lightning/lightning.js?v=4"></script>
+  <script defer src="./wake-lock.js?v=3"></script>
+  <script defer src="./app.js?v=4"></script>
 </head>
 <body>
   <main>
@@ -24,7 +26,13 @@
         <button id="back-button" class="icon-button" type="button" aria-label="정령 선택으로 돌아가기" title="정령 선택">
           <svg viewBox="0 0 32 32" aria-hidden="true"><path d="m19 7-9 9 9 9M10 16h15"/></svg>
         </button>
-        <h1 id="board-title"></h1>
+        <div class="board-heading">
+          <h1 id="board-title"></h1>
+          <button id="wake-button" class="wake-button" type="button" data-state="off" aria-pressed="false" title="화면 꺼짐 방지 켜기">
+            <span class="wake-dot" aria-hidden="true"></span>
+            <span id="wake-label" aria-live="polite">화면 켜짐 유지</span>
+          </button>
+        </div>
         <button id="reset-button" class="icon-button reset-button" type="button" aria-label="현신 초기화" title="현신 초기화" disabled>
           <svg id="reset-icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M26 12a11 11 0 1 0 .2 7M26 4v8h-8"/></svg>
         </button>
