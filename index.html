@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#2b2117">
+  <meta name="description" content="정령섬 햇살 아래 넘치는 강물 정령보드와 현신 트랙 터치 도구">
+  <title>햇살 아래 넘치는 강물 — 정령보드</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; background: #2b2117; }
+    body { min-height: 100vh; min-height: 100svh; display: grid; place-items: center; }
+    #board { width: 100%; }
+    noscript { display: block; color: #fff; padding: 1rem; }
+  </style>
+</head>
+<body>
+  <main id="board" aria-label="정령보드"></main>
+  <noscript>현신을 터치하려면 브라우저의 JavaScript를 켜주세요.</noscript>
+  <script src="./spirits/river/river.js"></script>
+  <script>RiverSurgesInSunlight.mount(document.getElementById('board'));</script>
+</body>
+</html>
