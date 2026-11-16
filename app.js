@@ -2,7 +2,7 @@
 (function () {
   'use strict';
   // 새 정령 파일을 index.html에서 불러온 다음 이 목록에 등록합니다.
-  const spirits = [window.RiverSurgesInSunlight, window.LightningSwiftStrike];
+  const spirits = [window.RiverSurgesInSunlight, window.LightningSwiftStrike, window.Thunderspeaker];
   const selectionScreen = document.getElementById('selection-screen');
   const boardScreen = document.getElementById('board-screen');
   const list = document.getElementById('spirit-list');
