@@ -8,25 +8,27 @@
 (function (global) {
   'use strict';
 
-  const WIDTH = 1536;
-  const HEIGHT = 1024;
+  const WIDTH = 1507;
+  const HEIGHT = 988;
   const DIAMETER = 86;
   const scriptUrl = document.currentScript && document.currentScript.src;
-  const defaultImageUrl = new URL('./river.webp', scriptUrl || document.baseURI).href;
-  const columns = [760, 872, 985, 1098, 1211, 1324];
+  const defaultImageUrl = new URL('./river.webp?v=2', scriptUrl || document.baseURI).href;
+  const thumbnailUrl = new URL('./river-banner.webp?v=2', scriptUrl || document.baseURI).href;
+  // 외곽 크롭(왼쪽 15px, 위쪽 20px)을 좌표에도 동일하게 반영합니다.
+  const columns = [745, 857, 970, 1083, 1196, 1309];
   const energyLabels = ['에너지 2', '에너지 2', '에너지 3', '에너지 4', '에너지 4', '에너지 5'];
   const cardLabels = ['카드 사용 2', '카드 사용 2', '카드 사용 3', '카드 1장 회수', '카드 사용 4', '카드 사용 5'];
 
   // 첫 번째 칸(에너지 1 / 카드 사용 1)은 항상 공개되어 있으므로 버튼을 만들지 않습니다.
   // 좌표는 원본 이미지 기준이며 실제 버튼 배치에는 %로 변환합니다.
   const slots = Object.freeze([
-    ...columns.map((x, i) => Object.freeze({ id: `energy-${i + 1}`, track: 'energy', x, y: 310, label: energyLabels[i] })),
-    ...columns.map((x, i) => Object.freeze({ id: `cards-${i + 1}`, track: 'cards', x, y: 465, label: cardLabels[i] })),
+    ...columns.map((x, i) => Object.freeze({ id: `energy-${i + 1}`, track: 'energy', x, y: 290, label: energyLabels[i] })),
+    ...columns.map((x, i) => Object.freeze({ id: `cards-${i + 1}`, track: 'cards', x, y: 445, label: cardLabels[i] })),
   ]);
 
   const tokenMarkup = '<svg viewBox="0 0 100 100" aria-hidden="true" focusable="false"><circle cx="50" cy="50" r="43" fill="none" stroke="currentColor" stroke-width="2" opacity=".45"/><path d="M80 58C86 36 69 17 47 20C24 23 16 48 29 65C42 82 70 76 73 56C76 39 57 28 43 37C30 46 37 64 50 63C61 62 65 49 56 45C50 42 45 47 47 52" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/></svg>';
   const css = `
-    .river-board { position:relative; width:100%; max-width:calc(100svh * ${WIDTH / HEIGHT}); aspect-ratio:${WIDTH}/${HEIGHT}; margin:auto; isolation:isolate; }
+    .river-board { position:relative; width:100%; max-width:calc(var(--board-available-height, 100svh) * ${WIDTH / HEIGHT}); aspect-ratio:${WIDTH}/${HEIGHT}; margin:auto; isolation:isolate; }
     .river-board__image { display:block; width:100%; height:100%; user-select:none; -webkit-user-select:none; -webkit-user-drag:none; }
     .river-board__slot { position:absolute; transform:translate(-50%,-50%); margin:0; padding:0; border:0; border-radius:50%; background:transparent; cursor:pointer; touch-action:manipulation; -webkit-tap-highlight-color:transparent; user-select:none; -webkit-user-select:none; appearance:none; -webkit-appearance:none; }
     .river-board__token { display:block; width:100%; height:100%; border-radius:50%; box-sizing:border-box; border:2px solid #063c3e; background:radial-gradient(circle at 32% 25%,#4ec8bc 0%,#197d7d 48%,#06434b 100%); color:#c3f4e6; box-shadow:0 2px 4px #001c2c80,inset 0 0 0 2px #7fddd661; pointer-events:none; }
@@ -124,6 +126,7 @@
     width: WIDTH,
     height: HEIGHT,
     imageUrl: defaultImageUrl,
+    thumbnailUrl,
     slots,
     mount,
   });
